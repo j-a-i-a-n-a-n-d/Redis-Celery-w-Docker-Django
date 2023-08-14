@@ -1,18 +1,26 @@
 version: '3.8'
 services:
+  nginx:
+    build: ./nginx
+    ports:
+      - 1300:80
+    depends_on:
+      - django
+    restart: on-failure
+    container_name: nginx1
   #self build from DockerFile
-  django :
+  django:
     build: .
     container_name: django1
     volumes:
       - volume1:/volume1
     ports:
       - 8000:8000
-    entrypoint: 
+    entrypoint:
       - /myworkdir/entrypoints/server-entrypoint.sh
-    # command: 
+      # command: 
       # - python3 manage.py runserver 0:0:0:0:8000
-  #redis server 
+      #redis server 
   redis:
     image: redis:6.0-alpine
     container_name: redis1
@@ -20,13 +28,12 @@ services:
       - 6379:6379
     volumes:
       - volume1:/volume1
-  
   #celery worker
   worker:
     restart: always
     build: .
     container_name: worker1
-    entrypoint: 
+    entrypoint:
       - /myworkdir/entrypoints/worker-entrypoint.sh
     volumes:
       - volume1:/volume1
