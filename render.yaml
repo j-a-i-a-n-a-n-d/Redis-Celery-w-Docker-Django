@@ -1,0 +1,37 @@
+services:
+  - name: django
+    dockerfile: ./Dockerfile
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: "dj_celery_redis_docker.settings"
+      - key: GUNICORN_CMD_ARGS
+        value: "--bind=0.0.0.0:8000"
+    automaticBuild:
+      context: .
+
+  - name: nginx
+    dockerfile: ./nginx/Dockerfile
+    envVars:
+      - key: NGINX_PORT
+        value: "80"
+    automaticBuild:
+      context: ./nginx
+    staticPublishing:
+      - sourcePath: ./nginx/static
+        targetPath: /static
+
+  - name: redis
+    image: "redis:6.0-alpine"
+
+  - name: worker
+    dockerfile: ./Dockerfile
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: "dj_celery_redis_docker.settings"
+    automaticBuild:
+      context: .
+
+automaticUpdates:
+  - service: django
+  - service: nginx
+  - service: worker
