@@ -164,3 +164,6 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'jai01anand@gmail.com'
 EMAIL_HOST_PASSWORD = 'qjpjphqecfffvjyo'
+
+SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_HTTPONLY = True

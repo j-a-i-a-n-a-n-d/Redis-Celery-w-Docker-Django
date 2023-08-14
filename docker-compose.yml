@@ -3,7 +3,7 @@ services:
   nginx:
     build: ./nginx
     ports:
-      - 1300:80
+      - 80:80
     depends_on:
       - django
     restart: on-failure
@@ -14,8 +14,8 @@ services:
     container_name: django1
     volumes:
       - volume1:/volume1
-    ports:
-      - 8000:8000
+      # ports:
+      # - 8000:8000
     entrypoint:
       - /myworkdir/entrypoints/server-entrypoint.sh
       # command: 
