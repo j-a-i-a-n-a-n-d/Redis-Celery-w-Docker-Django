@@ -8,12 +8,18 @@ services:
       - django
     restart: on-failure
     container_name: nginx1
+    volumes:
+      - volume1:/volume1
+      - static:/static
   #self build from DockerFile
   django:
     build: .
     container_name: django1
     volumes:
       - volume1:/volume1
+      - static:/static
+    env_file:
+      - env-dev.env
       # ports:
       # - 8000:8000
     entrypoint:
@@ -43,3 +49,4 @@ services:
 
 volumes:
   volume1: {}
+  static: {}

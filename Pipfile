@@ -10,6 +10,7 @@ djangorestframework = "*"
 django-cors-headers = "*"
 markdown = "*"
 celery = {version = "*", extras = ["redis"]}
+python-decouple = "*"
 
 [dev-packages]
 

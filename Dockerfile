@@ -19,6 +19,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 #copying the project files to the workdir
 COPY . /myworkdir/
 
+RUN python manage.py collectstatic --noinput
 #command to run the server
 #CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
 RUN chmod +x /myworkdir/entrypoints/server-entrypoint.sh
