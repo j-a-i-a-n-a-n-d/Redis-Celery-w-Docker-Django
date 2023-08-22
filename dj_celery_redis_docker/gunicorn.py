@@ -12,4 +12,4 @@ loglevel = "info"
 reload = bool(strtobool(os.getenv("WEB_RELOAD", False)))
 limit_request_line = int(os.getenv("LIMIT_REQUEST_LINE", 8190))
 limit_request_fields = int(os.getenv("LIMIT_REQUEST_FIELDS", 1000))
-app_module = "wsgi:application"
+app_module = "dj_celery_redis_docker.wsgi:application"
